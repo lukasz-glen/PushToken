@@ -219,6 +219,5 @@ Code is distributed under MIT license with an exception.
 
 - Governance Beta example, with a snapshot in the future
 - document comparison to ERC20Snapshot and Compound
-- rename repo
 - slither
 - missing test for many transfers within one block
