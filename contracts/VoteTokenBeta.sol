@@ -93,7 +93,7 @@ contract VoteTokenBeta is BaseToken {
      * Make sure that you will not need the snapshot key in the future, the operation is irreversible.
      * @dev See also {IERC20-transfer}.
      */
-    function transferAndReclaimGas(address recipient, uint256 amount, uint256 snapshotKey) public virtual returns (bool) {
+    function transferAndReclaimGas(address recipient, uint256 amount, uint256 snapshotKey) external virtual returns (bool) {
         _reclaimGas(snapshotKey);
         _transfer(msg.sender, recipient, amount);
         return true;
@@ -119,7 +119,7 @@ contract VoteTokenBeta is BaseToken {
         return lastSnapshotId_;
     }
 
-    function getLastSnapshotId() internal returns (uint256) {
+    function getLastSnapshotId() internal view returns (uint256) {
         return _lastSnapshotId;
     }
 
@@ -127,7 +127,7 @@ contract VoteTokenBeta is BaseToken {
      * @notice the last snapshot id globally
      * @dev this is not exactly {_lastSnapshotId}, just id is extracted
      */
-    function lastSnapshotId() public view returns (uint256) {
+    function lastSnapshotId() external view returns (uint256) {
         return _lastSnapshotId & 0x0000000000000000000000000000000000000000000000000000FFFFFFFFFFFF;
     }
 
@@ -135,7 +135,7 @@ contract VoteTokenBeta is BaseToken {
      * @notice the block of last snapshot id
      * @dev the block number is extracted from {_lastSnapshotId}
      */
-    function lastSnapshotBlock() public view returns (uint256) {
+    function lastSnapshotBlock() external view returns (uint256) {
         return _lastSnapshotId  >> 48;
     }
 

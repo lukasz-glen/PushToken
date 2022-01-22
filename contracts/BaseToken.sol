@@ -83,7 +83,7 @@ abstract contract BaseToken is IERC20 {
     /**
      * @dev See {ERC20-increaseAllowance}.
      */
-    function increaseAllowance(address spender, uint256 addedValue) public virtual returns (bool) {
+    function increaseAllowance(address spender, uint256 addedValue) external virtual returns (bool) {
         _approve(msg.sender, spender, _allowances[msg.sender][spender] + addedValue);
         return true;
     }
@@ -91,7 +91,7 @@ abstract contract BaseToken is IERC20 {
     /**
      * @dev See {ERC20-decreaseAllowance}.
      */
-    function decreaseAllowance(address spender, uint256 subtractedValue) public virtual returns (bool) {
+    function decreaseAllowance(address spender, uint256 subtractedValue) external virtual returns (bool) {
         uint256 currentAllowance = _allowances[msg.sender][spender];
         require(currentAllowance >= subtractedValue, "BaseToken: decreased allowance below zero");
         unchecked {

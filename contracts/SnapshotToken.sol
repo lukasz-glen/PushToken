@@ -89,7 +89,7 @@ contract SnapshotToken is BaseToken {
      * Make sure that you will not need the snapshot key in the future, the operation is irreversible.
      * @dev See also {IERC20-transfer}.
      */
-    function transferAndReclaimGas(address recipient, uint256 amount, uint256 snapshotKey) public virtual returns (bool) {
+    function transferAndReclaimGas(address recipient, uint256 amount, uint256 snapshotKey) external virtual returns (bool) {
         _reclaimGas(snapshotKey);
         _transfer(msg.sender, recipient, amount);
         return true;
@@ -113,7 +113,7 @@ contract SnapshotToken is BaseToken {
     /**
      * @notice the last snapshot id globally
      */
-    function lastSnapshotId() public view returns (uint256) {
+    function lastSnapshotId() external view returns (uint256) {
         return _lastSnapshotId;
     }
 
