@@ -188,6 +188,41 @@ as an example of such implementation with *Comp*. This is rather easy but has tw
 - The provided implementation does not support gas reclaim. 
   This is because it would break *getPriorVotes()* algorithm. 
   Adjusting the algorithm requires more work.
+  
+## Gas costs comparison of transfers
+
+The figures below are illustrative.
+Gas consumption is a subject of many factors, and it depends on a scenario.
+The report is generated with tests within this repo.
+Accounts transferring tokens with *Comp* and *ERC20Votes* delegated votes,
+so the comparison is more reliable, see *Delegating* section for further information.
+Note, that gas saving mainly comes from storage data being tightly packed.
+
+Comparison of gas consumption of plain transfers between SnapshotToken and OZ ERC20Snapshot.
+
+|  Contract          |  Method    |  Min        |  Max        |  Avg        |
+|--------------------|------------|-------------|-------------|-------------|
+|  ERC20SnapshotDev  |  transfer  |      41865  |      58977  |      50421  |
+|  SnapshotTokenDev  |  transfer  |      36835  |      53969  |      45402  |
+
+Comparison of gas consumption of plain transfers between VoteTokenAlpha and OZ ERC20Votes and c-p Comp,
+  all transfers are between accounts that delegated votes to themselves.
+
+|  Contract           |  Method    |  Min        |  Max        |  Avg        |
+|---------------------|------------|-------------|-------------|-------------|
+|  Comp               |  transfer  |     106086  |     137699  |     121893  |
+|  ERC20VotesDev      |  transfer  |     103913  |     135370  |     119642  |
+|  VoteTokenAlphaDev  |  transfer  |      74006  |      79136  |      76571  |
+
+Comparison of gas consumption of plain transfers between VoteTokenBeta and OZ ERC20Votes and c-p Comp,
+  all transfers are between accounts that delegated votes to themselves, 
+  in case of VoteTokenBeta a snapshot is taken before each transfer 
+
+|  Contract          |  Method    |  Min        |  Max        |  Avg        |
+|--------------------|------------|-------------|-------------|-------------|
+|  Comp              |  transfer  |     106086  |     137699  |     121893  |
+|  ERC20VotesDev     |  transfer  |     103913  |     135370  |     119642  |
+|  VoteTokenBetaDev  |  transfer  |      76275  |      81405  |      78840  |
 
 ## Tests
 
@@ -218,5 +253,5 @@ Code is distributed under MIT license with an exception.
 ## TODO
 
 - Governance Beta example, with a snapshot in the future
-- document comparison to ERC20Snapshot and Compound
-- missing test for many transfers within one block
+- Missing test for many transfers within one block
+- Gas cost comparison of voting
